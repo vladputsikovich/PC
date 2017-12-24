@@ -28,7 +28,7 @@ app.get('/header', function(req,res){
     for(var name in req.headers){
         s+=name + '; ' + req.headers[name]+ '\n';
     }
-    req.send(s);
+    res.send(s);
 }); 
 
 app.get('/about', function (req, res) {

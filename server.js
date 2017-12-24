@@ -22,6 +22,15 @@ app.get('/', function (req, res) {
 });
 
 
+app.get('/header', function(req,res){
+    res.set('Content-type', 'text/plain');
+    var s = '';
+    for(var name in req.headers){
+        s+=name + '; ' + req.headers[name]+ '\n';
+    }
+    req.send(s);
+}); 
+
 app.get('/about', function (req, res) {
     res.render('about', {
         fortune: fortune.getFortune(),

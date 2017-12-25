@@ -16,20 +16,25 @@ app.use(function (req, res, next) {
     next();
 });
 
+app.use(function(req, res, next){
+    if(!res.locals.partials){ res.locals.partials = {};}
+    res.locals.partials.weatherContext = getWeatherData();
+    next();
+});
 
 app.get('/', function (req, res) {
     res.render('home');
 });
 
 
-app.get('/header', function(req,res){
+app.get('/header', function (req, res) {
     res.set('Content-type', 'text/plain');
     var s = '';
-    for(var name in req.headers){
-        s+=name + '; ' + req.headers[name]+ '\n';
+    for (var name in req.headers) {
+        s += name + '; ' + req.headers[name] + '\n';
     }
     res.send(s);
-}); 
+});
 
 app.get('/about', function (req, res) {
     res.render('about', {
@@ -65,3 +70,30 @@ app.listen(app.get('port'), function () {
         app.get('port') + '; нажмите Ctrl+Q для завершения.');
 });
 
+function getWeatherData() {
+    return {
+        locations: [
+            {
+                name: 'Brest',
+                forecastUrl :'http://www.wunderground.com/US/OR/Bend.html',
+                iconUrl:'http://icons-ak.wxug.com/i/c/k/partlycloudy.gif',
+                weather:'такое',
+                temp:'15 C'
+            },
+            {
+                name: 'pinsk',
+                forecastUrl :'http://www.wunderground.com/US/OR/Bend.html',
+                iconUrl:'http://icons-ak.wxug.com/i/c/k/partlycloudy.gif',
+                weather:'нормас',
+                temp:'20 C'
+            },
+            {
+                name: 'iv',
+                forecastUrl :'http://www.wunderground.com/US/OR/Bend.html',
+                iconUrl:'http://icons-ak.wxug.com/i/c/k/partlycloudy.gif',
+                weather:'бывало лучше',
+                temp:'17 C'
+            },
+        ],
+    };
+}

@@ -1,7 +1,16 @@
 var fortune = require('./lib/fortune.js');
 var express = require('express');
 var app = express();
-var handlebars = require('express-handlebars').create({ defaultLayout: 'main' });
+var handlebars = require('express-handlebars').create({ 
+    defaultLayout: 'main' ,
+    helpers:{
+        section: function(name , options){
+            if(!this._sections) this._sections = {};
+            this._sections[name] = options.fn(this);
+            return null;
+        }
+    }
+});
 
 
 app.engine('handlebars', handlebars.engine);
@@ -50,6 +59,18 @@ app.get('/tours/river', function () {
 app.get('/tours/group-rate', function () {
     res.render('/tours/group-rate');
 });
+
+app.get('/nursery-rhyme', function (req , res) {
+    res.render('nursery-rhyme');
+});
+
+app.get('/data/nursery-rhyme', function (req , res) {
+    res.json({
+        animal : 'морж',
+        bodyPart :'клык'
+    });
+});
+
 
 // пользовательская страница 404 
 app.use(function (req, res) {

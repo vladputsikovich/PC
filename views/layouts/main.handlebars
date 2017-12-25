@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>SITESSSS</title>
-    {{#if showTests}}
+    <!--{{#if showTests}}
         <link rel="stylesheet" href="/vendor/mocha.css"> 
-    {{/if}}
-    <script src = "//code.jquery.com/jquery-2.0.2.min.js"></script>
+    {{/if}}-->
+    {{{_sections.head}}}
 </head>
 
 <body>
@@ -17,7 +17,9 @@
         <img src="/img/секрет.png" alt="хихих ебать ">
     </header>
     {{{body}}}
-    {{#if showTests}}
+     <script src = "//code.jquery.com/jquery-2.0.2.min.js"></script>
+    {{{_sections.jquery}}}
+   <!-- {{#if showTests}}
         <div id="mocha"></div>
             <script src="/vendor/mocha.js"></script>
             <script src="/vendor/chai.js"></script>
@@ -31,6 +33,8 @@
             {{/if}} 
             <script>mocha.run();</script>
     {{/if}}
+-->
+
 </body>
 
 </html>
